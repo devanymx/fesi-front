@@ -1,0 +1,63 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "parserOptions": {
+    "parser": "@babel/eslint-parser",
+    "requireConfigFile": false
+  },
+  "extends": ["@nuxtjs", "plugin:nuxt/recommended", "eslint:recommended"],
+  "plugins": [],
+  // add your custom rules here
+  "rules": {
+    "max-lines": [
+      "warn",
+      {
+        "max": 250,
+        "skipBlankLines": true
+      }
+    ],
+    "max-len": [
+      "warn",
+      {
+        "code": 120
+      }
+    ],
+    "no-trailing-spaces": "error",
+    "no-console": [
+      "error",
+      {
+        "allow": ["warn", "error", "info"]
+      }
+    ],
+    "arrow-spacing": [
+      "error",
+      {
+        "before": true,
+        "after": true
+      }
+    ],
+    "arrow-parens": ["warn", "as-needed"],
+    "space-in-parens": ["error", "never"],
+    "no-lonely-if": "error",
+    "dot-location": ["error", "property"],
+    "no-var": "warn",
+    "jsx-quotes": ["error", "prefer-double"],
+    "comma-style": ["error", "last"],
+    "comma-dangle": ["error", "never"],
+    "default-case": "error",
+    "no-redeclare": "error",
+    "no-useless-return": "error",
+    "object-curly-spacing": ["warn", "always"],
+    "prefer-arrow-callback": "error",
+    "prefer-const": "error",
+    "prefer-template": "error",
+    "dot-notation": "error",
+    "max-depth": ["error", 3],
+    "quotes": ["warn", "single"],
+    "semi": ["error", "never"],
+    "space-infix-ops": "error"
+  }
+}
