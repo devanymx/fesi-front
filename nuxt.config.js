@@ -16,20 +16,11 @@ export default {
     ]
   },
 
-  // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-    'ant-design-vue/dist/antd.css'
-  ],
-
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    '@/plugins/antd-ui'
-  ],
-
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: [
     '@/components',
-    '@/components/shared'
+    '@/components/shared',
+    '@/components/products'
   ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
@@ -44,7 +35,8 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    'bootstrap-vue/nuxt'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -64,5 +56,10 @@ export default {
       solid: true,
       brands: true
     }
+  },
+
+  env: {
+    apiUrl: process.env.API_URL,
+    apiToken: process.env.API_TOKEN
   }
 }
