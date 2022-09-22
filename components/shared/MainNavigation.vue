@@ -1,16 +1,26 @@
 <template>
-  <!-- eslint-disable-next-line vue/no-v-model-argument -->
-  <a-menu mode="horizontal">
-    <a-menu-item key="products">
-      Productos
-    </a-menu-item>
-    <a-menu-item key="departments">
-      Departamentos
-    </a-menu-item>
-    <a-menu-item key="warehouse">
-      Almacén
-    </a-menu-item>
-  </a-menu>
+  <div class="p-3">
+    <b-nav>
+      <b-nav-item>
+        <NuxtLink to="/products" class="text-decoration-none text-dark">
+          <fontawesome-icon class="mr-1" :icon="['fa', 'shapes']" />
+          Productos
+        </NuxtLink>
+      </b-nav-item>
+      <b-nav-item>
+        <NuxtLink to="/" class="text-decoration-none text-dark">
+          <fontawesome-icon class="mr-1" :icon="['fa', 'layer-group']" />
+          Departamentos
+        </NuxtLink>
+      </b-nav-item>
+      <b-nav-item>
+        <NuxtLink to="/" class="text-decoration-none text-dark">
+          <fontawesome-icon class="mr-1" :icon="['fa', 'warehouse']" />
+          Almacén
+        </NuxtLink>
+      </b-nav-item>
+    </b-nav>
+  </div>
 </template>
 
 <script>
