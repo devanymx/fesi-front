@@ -1,13 +1,14 @@
 <template>
   <!-- eslint-disable-next-line vue/no-v-model-argument -->
-  <a-menu v-model:selectedKeys="current" mode="horizontal">
-    <a-menu-item key="mail">
-      <template #icon />
-      Navigation One
+  <a-menu mode="horizontal">
+    <a-menu-item key="products">
+      Productos
     </a-menu-item>
-    <a-menu-item key="app">
-      <template #icon />
-      Navigation Two
+    <a-menu-item key="departments">
+      Departamentos
+    </a-menu-item>
+    <a-menu-item key="warehouse">
+      Almacén
     </a-menu-item>
   </a-menu>
 </template>
