@@ -59,6 +59,15 @@
     "quotes": ["warn", "single"],
     "semi": ["error", "never"],
     "space-infix-ops": "error",
-    "vue/multi-word-component-names": "off"
+    "vue/multi-word-component-names": "off",
+    "vue/html-closing-bracket-newline": "off",
+    "vue/html-closing-bracket-spacing": [
+      "error",
+      {
+        "startTag": "never",
+        "endTag": "never",
+        "selfClosingTag": "always"
+      }
+    ]
   }
 }

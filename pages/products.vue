@@ -1,8 +1,10 @@
 <template>
-  <div>
-    <span>Productos</span>
+  <b-container class="products-container" fluid>
+    <p class="h2 text-dark-80">
+      Sección de productos
+    </p>
     <products-list :products="products" />
-  </div>
+  </b-container>
 </template>
 
 <script>
@@ -22,3 +24,9 @@ export default {
   fetchKey: 'products-page'
 }
 </script>
+
+<style>
+.products-container {
+  width: calc(100% - 7rem);
+}
+</style>
