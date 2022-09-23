@@ -2,10 +2,11 @@
   <CrudTable
     :columns="[
       'id',
-      'name',
-      'detail',
-      'action'
+      {key: 'name', label: 'Nombre del producto'},
+      {key: 'detail', label: 'Detalle del producto'},
+      { key: 'action', label: 'Acciones', tdClass: 'actions-column-header' }
     ]"
+    :searchable="true"
     :form-fields="{ name: '' }"
     :initial-table-data="products">
     <template #input-fields="{ formdata }">
