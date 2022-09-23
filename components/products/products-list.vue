@@ -1,6 +1,11 @@
 <template>
   <CrudTable
-    :columns="['name', 'action']"
+    :columns="[
+      'id',
+      'name',
+      'detail',
+      'action'
+    ]"
     :form-fields="{ name: '' }"
     :initial-table-data="products">
     <template #input-fields="{ formdata }">
