@@ -1,7 +1,9 @@
-import { getProducts } from './getProducts'
+import getProductsHandler from './getProducts'
+import deleteProductHandler from './deleteProduct'
 
-export const ProductsServices = () => {
+export const ProductsServices = fetchService => {
   return {
-    getProducts
+    getProducts: getProductsHandler(fetchService).getProducts,
+    deleteProduct: deleteProductHandler(fetchService).deleteProduct
   }
 }
