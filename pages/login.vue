@@ -1,6 +1,6 @@
 <template>
   <div>
-    Login page
+    <LoginForm />
   </div>
 </template>
 
