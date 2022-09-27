@@ -33,7 +33,9 @@
               size="sm"
               class="rounded-pill px-3"
               @click="editItem(data.item)">
-              <fontawesome-icon :icon="['fa', 'pencil']" />
+              <!--eslint-disable-next-line-->
+              <fontawesome-icon :icon="['fa', 'pencil']">
+              </fontawesome-icon>
             </b-button>
             <b-button
               v-b-modal="'edit-modal'"
@@ -41,7 +43,9 @@
               class="rounded-pill px-3"
               size="sm"
               @click="deleteItem(data.item)">
-              <fontawesome-icon :icon="['fa', 'trash-can']" />
+              <!--eslint-disable-next-line-->
+              <fontawesome-icon :icon="['fa', 'trash-can']">
+              </fontawesome-icon>
             </b-button>
           </div>
         </template>
@@ -85,6 +89,11 @@ export default {
       type: Boolean,
       required: false,
       default: false
+    },
+    actionsMethods: {
+      type: Object,
+      required: false,
+      default: () => {}
     }
   },
   data () {
@@ -115,10 +124,25 @@ export default {
       this.editedIndex = this.tableData.indexOf(item)
       this.editedItem = Object.assign({}, item)
     },
-    deleteItem (item) {
+    async deleteItem (item) {
       const index = this.tableData.indexOf(item)
-      confirm('Are you sure you want to delete this item?') && this.tableData.splice(index, 1)
-      // axios.delete(`${this.endpoint}/${item.id}`)
+      const deleteSuccess = await this.actionsMethods.deleteItem(item?.id)
+      // eslint-disable-next-line
+      console.log(deleteSuccess)
+      if (deleteSuccess === true) {
+        this.$bvToast.toast('Item eliminado correctamente', {
+          title: 'Eliminado',
+          variant: 'success',
+          solid: true
+        })
+        this.tableData.splice(index, 1)
+      } else {
+        this.$bvToast.toast('Error al eliminar el item', {
+          title: 'Error',
+          variant: 'danger',
+          solid: true
+        })
+      }
     },
     close () {
       this.modalShow = false
