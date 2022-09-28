@@ -27,7 +27,7 @@
     ],
     "no-trailing-spaces": "error",
     "no-console": [
-      "error",
+      "warn",
       {
         "allow": ["warn", "error", "info"]
       }
