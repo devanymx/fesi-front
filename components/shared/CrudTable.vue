@@ -127,8 +127,6 @@ export default {
     async deleteItem (item) {
       const index = this.tableData.indexOf(item)
       const deleteSuccess = await this.actionsMethods.deleteItem(item?.id)
-      // eslint-disable-next-line
-      console.log(deleteSuccess)
       if (deleteSuccess === true) {
         this.$bvToast.toast('Item eliminado correctamente', {
           title: 'Eliminado',
