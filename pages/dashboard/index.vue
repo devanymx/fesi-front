@@ -1,9 +1,10 @@
 <template>
-  <Login />
+  <Tutorial />
 </template>
 
 <script>
 export default {
-  name: 'IndexPage'
+  name: 'index',
+  middleware: ['auth']
 }
 </script>

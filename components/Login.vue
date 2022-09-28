@@ -81,19 +81,12 @@ export default {
   methods: {
     async onSubmit (event) {
       event.preventDefault()
-      try {
-        await this.$auth.loginWith('laravelSanctum', {
-          data: {
-            email: this.form.email,
-            password: this.form.password
-          }
-        })
-        await this.$router.push('/')
-      } catch (e) {
-        this.errorCode = e.response.status
-        this.error = `${e.response.data.data.error}`
-        this.$refs.errorLogin.show()
-      }
+      await this.$auth.loginWith('laravelSanctum', {
+        data: {
+          email: this.form.email,
+          password: this.form.password
+        }
+      })
     },
     hideModal (modal) {
       this.$refs[modal].hide()

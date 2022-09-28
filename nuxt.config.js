@@ -36,23 +36,45 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    'bootstrap-vue/nuxt'
+    'bootstrap-vue/nuxt',
+    '@nuxtjs/auth-next'
   ],
 
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    // Workaround to avoid enforcing hard-coded
-    // localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: 'https://exciting-cerf.74-208-86-124.plesk.page',
-    prefix: '/api',
-    credentials: false
+  speedkit: {
+    detection: {
+      performance: true,
+      browserSupport: true
+    }
   },
 
   plugins: [
-    '~/plugins/axios'
+
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
+
+  axios: {
+    credentials: true,
+    prefix: '/api'
+  },
+  auth: {
+    redirect: {
+      login: '/',
+      home: '/dashboard'
+    },
+    strategies: {
+      laravelSanctum: {
+        provider: 'laravel/sanctum',
+        url: process.env.API_URL,
+        endpoints: {
+          login: { url: '/api/login', method: 'post'}
+        }
+      }
+    }
+  },
+
+  ssr: false,
+
   build: {
   },
   fontawesome: {
