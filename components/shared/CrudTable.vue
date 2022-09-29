@@ -114,7 +114,7 @@ export default {
     this.tableData = this.initialTableData
     // axios(this.endpoint).then(response=>this.tableData = response.data.data);
   },
-  methods: {
+  methods: { // TODO: Move toast's actions to hook or separated function to reuse and avoid code duplication
     createItem () {
       this.modalShow = true
       this.editedItem = Object.assign({}, this.formFields)
@@ -153,7 +153,22 @@ export default {
     async save () {
       if (this.editedIndex > -1) {
         Object.assign(this.tableData[this.editedIndex], this.editedItem)
-        // axios.put(`${this.endpoint}/${this.editedItem.id}`, this.editedItem)
+        const editSuccess = await this.actionsMethods.editItem(
+          this.editedItem.id,
+          { name: this.editedItem.name, detail: this.editedItem.name })
+        if (editSuccess === true) {
+          this.$bvToast.toast('Item editado correctamente', {
+            title: 'Editado',
+            variant: 'success',
+            solid: true
+          })
+        } else {
+          this.$bvToast.toast('Error al editar el item', {
+            title: 'Error',
+            variant: 'danger',
+            solid: true
+          })
+        }
       } else {
         this.tableData.push(this.editedItem)
         const createSuccess = await this.actionsMethods.createItem({

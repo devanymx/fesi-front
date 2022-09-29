@@ -17,6 +17,7 @@
       :actions-methods="{
         deleteItem: deleteProduct,
         createItem: createProduct,
+        editItem: editProduct
       }">
       <template #input-fields="{ formdata }">
         <b-form-group id="input-group-2" label="Nombre del producto" label-for="input-2">
@@ -59,6 +60,16 @@ export default {
     async createProduct ({ name, detail }) {
       return await ProductsServices(this.$axios)
         .createProduct({
+          name,
+          detail,
+          department_id: 1,
+          category_id: 1
+        })
+    },
+    async editProduct (productId, { name, detail }) {
+      return await ProductsServices(this.$axios).mutateProduct(
+        productId,
+        {
           name,
           detail,
           department_id: 1,
