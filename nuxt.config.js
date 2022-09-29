@@ -67,7 +67,7 @@ export default {
         provider: 'laravel/sanctum',
         url: process.env.API_URL,
         endpoints: {
-          login: { url: '/api/login', method: 'post'}
+          login: { url: '/api/login', method: 'post' }
         }
       }
     }
@@ -88,5 +88,10 @@ export default {
   env: {
     apiUrl: process.env.API_URL,
     apiToken: process.env.API_TOKEN
+  },
+  vue: {
+    config: {
+      silent: true
+    }
   }
 }

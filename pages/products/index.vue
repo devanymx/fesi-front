@@ -11,14 +11,27 @@
         { key: 'action', label: 'Acciones', tdClass: 'actions-column-header' }
       ]"
       :searchable="true"
-      :form-fields="{ name: '' }"
+      crud-title="Producto"
+      :form-fields="{ name: '', detail: '' }"
       :initial-table-data="products"
       :actions-methods="{
-        deleteItem: deleteProduct
+        deleteItem: deleteProduct,
+        createItem: createProduct,
       }">
       <template #input-fields="{ formdata }">
-        <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
-          <b-form-input id="input-2" v-model="formdata.name" required placeholder="Enter name" />
+        <b-form-group id="input-group-2" label="Nombre del producto" label-for="input-2">
+          <b-form-input
+            id="input-2"
+            v-model="formdata.name"
+            required
+            placeholder="Introduce un nombre del producto" />
+        </b-form-group>
+        <b-form-group id="input-group-2" label="Detalle del producto" label-for="input-2">
+          <b-form-input
+            id="input-2"
+            v-model="formdata.detail"
+            required
+            placeholder="Introduce un detalle de producto" />
         </b-form-group>
       </template>
     </CrudTable>
@@ -42,6 +55,15 @@ export default {
   methods: {
     async deleteProduct (productId) {
       return await ProductsServices(this.$axios).deleteProduct(productId)
+    },
+    async createProduct ({ name, detail }) {
+      return await ProductsServices(this.$axios)
+        .createProduct({
+          name,
+          detail,
+          department_id: 1,
+          category_id: 1
+        })
     }
   },
   fetchOnServer: true,

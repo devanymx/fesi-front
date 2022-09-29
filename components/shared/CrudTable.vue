@@ -15,7 +15,7 @@
         </b-input-group>
       </div>
       <b-button class="header-button mb-2 px-4" variant="primary" size="md" @click="createItem">
-        Agregar Producto
+        Agregar {{ crudTitle }}
       </b-button>
     </div>
     <div class="custom-border-table">
@@ -33,9 +33,7 @@
               size="sm"
               class="rounded-pill px-3"
               @click="editItem(data.item)">
-              <!--eslint-disable-next-line-->
-              <fontawesome-icon :icon="['fa', 'pencil']">
-              </fontawesome-icon>
+              <fontawesome-icon :icon="['fa', 'pencil']" />
             </b-button>
             <b-button
               v-b-modal="'edit-modal'"
@@ -43,9 +41,7 @@
               class="rounded-pill px-3"
               size="sm"
               @click="deleteItem(data.item)">
-              <!--eslint-disable-next-line-->
-              <fontawesome-icon :icon="['fa', 'trash-can']">
-              </fontawesome-icon>
+              <fontawesome-icon :icon="['fa', 'trash-can']" />
             </b-button>
           </div>
         </template>
@@ -55,10 +51,10 @@
       <b-form @submit.prevent="save">
         <slot :formdata="editedItem" name="input-fields" />
         <b-button size="sm" variant="danger" @click="close">
-          Cancel
+          Cancelar
         </b-button>
         <b-button type="submit" size="sm" variant="success">
-          Submit
+          Guardar
         </b-button>
       </b-form>
     </b-modal>
@@ -94,6 +90,11 @@ export default {
       type: Object,
       required: false,
       default: () => {}
+    },
+    crudTitle: {
+      type: String,
+      required: false,
+      default: ''
     }
   },
   data () {
@@ -106,7 +107,7 @@ export default {
   },
   computed: {
     formTitle () {
-      return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+      return this.editedIndex === -1 ? `Nuevo ${this.crudTitle}` : `Editar ${this.crudTitle}`
     }
   },
   mounted () {
@@ -149,13 +150,29 @@ export default {
         this.editedIndex = -1
       }, 300)
     },
-    save () {
+    async save () {
       if (this.editedIndex > -1) {
         Object.assign(this.tableData[this.editedIndex], this.editedItem)
         // axios.put(`${this.endpoint}/${this.editedItem.id}`, this.editedItem)
       } else {
         this.tableData.push(this.editedItem)
-        // axios.post(this.endpoint, this.editedItem)
+        const createSuccess = await this.actionsMethods.createItem({
+          name: this.editedItem.name ?? '',
+          detail: this.editedItem.detail ?? ''
+        }) // This should be the create function
+        if (createSuccess === true) {
+          this.$bvToast.toast('Item creado correctamente', {
+            title: 'Creado',
+            variant: 'success',
+            solid: true
+          })
+        } else {
+          this.$bvToast.toast('Error al crear el item', {
+            title: 'Error',
+            variant: 'danger',
+            solid: true
+          })
+        }
       }
       this.close()
     }
