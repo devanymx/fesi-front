@@ -155,7 +155,7 @@ export default {
         Object.assign(this.tableData[this.editedIndex], this.editedItem)
         const editSuccess = await this.actionsMethods.editItem(
           this.editedItem.id,
-          { name: this.editedItem.name, detail: this.editedItem.name })
+          { ...this.editedItem })
         if (editSuccess === true) {
           this.$bvToast.toast('Item editado correctamente', {
             title: 'Editado',
@@ -172,8 +172,7 @@ export default {
       } else {
         this.tableData.push(this.editedItem)
         const createSuccess = await this.actionsMethods.createItem({
-          name: this.editedItem.name ?? '',
-          detail: this.editedItem.detail ?? ''
+          ...this.editedItem
         }) // This should be the create function
         if (createSuccess === true) {
           this.$bvToast.toast('Item creado correctamente', {

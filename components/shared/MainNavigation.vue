@@ -8,13 +8,13 @@
         </NuxtLink>
       </b-nav-item>
       <b-nav-item>
-        <NuxtLink to="/" class="text-decoration-none text-dark">
+        <NuxtLink to="/departments" class="text-decoration-none text-dark">
           <fontawesome-icon class="mr-1" :icon="['fa', 'layer-group']" />
           Departamentos
         </NuxtLink>
       </b-nav-item>
       <b-nav-item>
-        <NuxtLink to="/" class="text-decoration-none text-dark">
+        <NuxtLink to="/warehouse" class="text-decoration-none text-dark">
           <fontawesome-icon class="mr-1" :icon="['fa', 'warehouse']" />
           Almacén
         </NuxtLink>
