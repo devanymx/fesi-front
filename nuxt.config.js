@@ -48,7 +48,7 @@ export default {
   },
 
   plugins: [
-
+    { src: '~plugins/file-pond-plugin.js', ssr: false }
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

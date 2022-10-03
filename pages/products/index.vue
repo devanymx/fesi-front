@@ -36,7 +36,9 @@
         minimum : '',
         maximum : '',
         taxes : '',
-        image : ''
+        image : '',
+        department_id : '',
+        category_id : ''
       }"
       :initial-table-data="products"
       :actions-methods="{
@@ -45,96 +47,130 @@
         editItem: editProduct
       }">
       <template #input-fields="{ formdata }">
-        <b-form-group id="input-group-2" label="Nombre del producto" label-for="input-2">
+        <b-form-group id="input-group-2" label="Nombre del producto" label-for="name">
           <b-form-input
-            id="input-2"
+            id="name"
             v-model="formdata.name"
             required
             placeholder="Introduce un nombre del producto" />
         </b-form-group>
-        <b-form-group id="input-group-2" label="Detalle del producto" label-for="input-2">
+        <b-form-group id="input-group-2" label="Detalle del producto" label-for="detail">
           <b-form-input
-            id="input-2"
+            id="detail"
             v-model="formdata.detail"
             required
             placeholder="Introduce un detalle de producto" />
         </b-form-group>
-        <b-form-group id="input-group-2" label="Código del producto" label-for="input-2">
+        <b-form-group id="input-group-2" label="Código del producto" label-for="code">
           <b-form-input
-            id="input-2"
+            id="code"
             v-model="formdata.code"
             required
             placeholder="Introduce un código de producto" />
         </b-form-group>
-        <b-form-group id="input-group-2" label="Descripción del producto" label-for="input-2">
+        <b-form-group id="input-group-2" label="Descripción del producto" label-for="description">
           <b-form-input
-            id="input-2"
+            id="description"
             v-model="formdata.description"
             required
             placeholder="Introduce la descripción del producto" />
         </b-form-group>
-        <b-form-group id="input-group-2" label="Unidad de medida del producto" label-for="input-2">
+        <b-form-group id="input-group-2" label="Unidad de medida del producto" label-for="measurement">
           <b-form-input
-            id="input-2"
+            id="measurement"
             v-model="formdata.measurement"
             required
             placeholder="Introduce una unidad de medida de producto" />
         </b-form-group>
-        <b-form-group id="input-group-2" label="Tipo de venta del producto" label-for="input-2">
+        <b-form-group id="input-group-2" label="Tipo de venta del producto" label-for="unit">
           <b-form-input
-            id="input-2"
+            id="unit"
             v-model="formdata.unit"
             required
             placeholder="Introduce un tipo de venta de producto" />
         </b-form-group>
-        <b-form-group id="input-group-2" label="Costo del producto" label-for="input-2">
+        <b-form-group id="input-group-2" label="Costo del producto" label-for="price">
           <b-form-input
-            id="input-2"
+            id="price"
             v-model="formdata.price"
             required
-            placeholder="Introduce un costo de producto" />
+            type="number"
+            placeholder="Introduce un costo de producto"
+            @change="onChangePrice(formdata.price)" />
         </b-form-group>
-        <b-form-group id="input-group-2" label="Ganancia del producto" label-for="input-2">
+        <b-form-group id="input-group-2" label="Ganancia del producto" label-for="profit">
           <b-form-input
-            id="input-2"
+            id="profit"
             v-model="formdata.profit"
+            type="number"
             required
-            placeholder="Introduce un ganancia de producto" />
+            placeholder="Introduce un ganancia de producto"
+            @change="onChangeProfit(formdata.profit)" />
         </b-form-group>
-        <b-form-group id="input-group-2" label="Precio de venta del producto" label-for="input-2">
+        <b-form-group id="input-group-2" label="Precio de venta del producto" label-for="sale_price">
           <b-form-input
-            id="input-2"
-            v-model="formdata.sale_price"
+            id="sale_price"
+            v-model="productPrice.sale_price"
+            type="number"
             required
             placeholder="Introduce un precio de venta de producto" />
         </b-form-group>
-        <b-form-group id="input-group-2" label="Mínimo del producto" label-for="input-2">
+        <b-form-group id="input-group-2" label="Mínimo del producto" label-for="minimum">
           <b-form-input
-            id="input-2"
+            id="minimum"
             v-model="formdata.minimum"
+            type="number"
             required
             placeholder="Introduce un mínimo de producto" />
         </b-form-group>
-        <b-form-group id="input-group-2" label="Máximo del producto" label-for="input-2">
+        <b-form-group id="input-group-2" label="Máximo del producto" label-for="maximum">
           <b-form-input
-            id="input-2"
+            id="maximum"
             v-model="formdata.maximum"
+            type="number"
             required
             placeholder="Introduce un máximo de producto" />
         </b-form-group>
-        <b-form-group id="input-group-2" label="Impuesto del producto" label-for="input-2">
+        <b-form-group id="input-group-2" label="Impuesto del producto" label-for="taxes">
           <b-form-input
-            id="input-2"
+            id="taxes"
             v-model="formdata.taxes"
+            type="number"
             required
             placeholder="Introduce el impuesto de producto" />
         </b-form-group>
-        <b-form-group id="input-group-2" label="Imagen del producto" label-for="input-2">
+        <b-form-group id="input-group-2" label="Imagen del producto" label-for="image">
           <b-form-input
-            id="input-2"
+            id="image"
             v-model="formdata.image"
             required
             placeholder="Introduce una imagen de producto" />
+        </b-form-group>
+        <vue-file-pond
+          ref="pond"
+          name="test"
+          class="filepond"
+          label-idle="Drop files here..."
+          :allow-multiple="true"
+          accepted-file-types="image/jpeg, image/png"
+          server="/api"
+          :files="myFiles"
+          @init="handleFilePondInit" />
+        <b-form-group id="input-group-2" label="Categoría del producto" label-for="category">
+          <b-form-select
+            id="category"
+            v-model="formdata.category_id"
+            :options="categories"
+            required
+          />
+        </b-form-group>
+        <b-form-group id="input-group-2" label="Departamento del producto" label-for="department">
+          <b-form-select
+            id="department"
+            v-model="formdata.department_id"
+            :options="departments"
+            required
+          />
         </b-form-group>
       </template>
     </CrudTable>
@@ -143,7 +179,8 @@
 
 <script>
 import { ProductsServices } from '~/services/productsServices'
-
+import 'filepond/dist/filepond.min.css'
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css'
 export default {
   name: 'ProductsView',
   middleware: ['auth'],
@@ -153,10 +190,25 @@ export default {
   },
   data () {
     return {
-      products: []
+      products: [],
+      categories: [],
+      departments: [],
+      productPrice: {
+        price: '',
+        profit: '',
+        sale_price: ''
+      },
+      myFiles: ['cat.jpeg']
     }
   },
+  mounted () {
+    this.getCategories()
+    this.getDepartments()
+  },
   methods: {
+    handleFilePondInit () {
+      console.log('FilePond has initialized')
+    },
     async deleteProduct (productId) {
       return await ProductsServices(this.$axios).deleteProduct(productId)
     },
@@ -171,7 +223,7 @@ export default {
           measurement,
           price,
           // eslint-disable-next-line camelcase
-          sale_price,
+          sale_price: this.productPrice.sale_price,
           profit,
           unit,
           minimum,
@@ -184,7 +236,7 @@ export default {
         })
     },
     // eslint-disable-next-line camelcase
-    async editProduct (productId, { name, detail, code, description, measurement, price, sale_price, profit, unit, minimum, maximum, taxes, image }) {
+    async editProduct (productId, { name, detail, code, description, measurement, price, sale_price, profit, unit, minimum, maximum, taxes, image, department_id, category_id }) {
       return await ProductsServices(this.$axios).mutateProduct(
         productId,
         {
@@ -195,7 +247,7 @@ export default {
           measurement,
           price,
           // eslint-disable-next-line camelcase
-          sale_price,
+          sale_price: this.productPrice.sale_price,
           profit,
           unit,
           minimum,
@@ -203,9 +255,48 @@ export default {
           taxes,
           image,
           status: 1,
-          department_id: 1,
-          category_id: 1
+          // eslint-disable-next-line camelcase
+          department_id,
+          // eslint-disable-next-line camelcase
+          category_id
         })
+    },
+    getCategories () {
+      this.$axios.$get('/api/categories').then(response => {
+        response.data.forEach(category => {
+          const dataCategory = {
+            value: category.id,
+            text: category.name
+          }
+          this.categories.push(dataCategory)
+        })
+      })
+    },
+    getDepartments () {
+      this.$axios.$get('/api/departments').then(response => {
+        response.data.forEach(department => {
+          const dataDepartment = {
+            value: department.id,
+            text: department.name
+          }
+          this.departments.push(dataDepartment)
+        })
+      })
+    },
+    onChangePrice (price) {
+      this.productPrice.price = price
+      if (!isNaN(this.productPrice.profit)) {
+        this.changeSalePrice()
+      }
+    },
+    onChangeProfit (profit) {
+      this.productPrice.profit = profit
+      if (!isNaN(this.productPrice.price)) {
+        this.changeSalePrice()
+      }
+    },
+    changeSalePrice () {
+      this.productPrice.sale_price = Math.ceil(this.productPrice.price * (this.productPrice.profit / 100)) + parseInt(this.productPrice.price)
     }
   },
   fetchOnServer: true,
