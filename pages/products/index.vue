@@ -6,90 +6,82 @@
     <CrudTable
       :columns="[
         'id',
-        {key: 'name', label: 'Nombre del producto'},
-        {key: 'detail', label: 'Detalle del producto'},
-        {key: 'department.name', label: 'Departamento del producto'},
-        {key: 'category.name', label: 'Categoría del producto'},
-        {key: 'code', label: 'Código del producto'},
-        {key: 'description', label: 'Descripcion del producto'},
-        {key: 'measurement', label: 'Medida del producto'},
-        {key: 'price', label: 'Precio del producto'},
-        {key: 'sale_price', label: 'Costo del producto'},
-        {key: 'profit', label: 'Ganancia del producto'},
-        {key: 'unit', label: 'Unidad del producto'},
-        {key: 'minimum', label: 'Minimo del producto'},
-        {key: 'maximum', label: 'Máximo del producto'},
-        {key: 'taxes', label: 'Impuestos del producto'},
-        {key: 'image', label: 'Imagen del producto'},
+        { key: 'name', label: 'Nombre del producto' },
+        { key: 'detail', label: 'Detalle del producto' },
+        { key: 'department.name', label: 'Departamento del producto' },
+        { key: 'category.name', label: 'Categoría del producto' },
+        { key: 'code', label: 'Código del producto' },
+        { key: 'description', label: 'Descripción del producto' },
+        { key: 'measurement', label: 'Medida del producto' },
+        { key: 'price', label: 'Precio del producto' },
+        { key: 'sale_price', label: 'Costo del producto' },
+        { key: 'profit', label: 'Ganancia del producto' },
+        { key: 'unit', label: 'Unidad del producto' },
+        { key: 'minimum', label: 'Mínimo del producto' },
+        { key: 'maximum', label: 'Máximo del producto' },
+        { key: 'taxes', label: 'Impuestos del producto' },
+        { key: 'image', label: 'Imagen del producto' },
         { key: 'action', label: 'Acciones', tdClass: 'actions-column-header' }
       ]"
       :searchable="true"
       crud-title="Producto"
       :form-fields="{
-        name : '',
-        detail : '',
-        code : '',
-        description : '',
-        measurement : '',
-        price : '',
-        sale_price : '',
-        profit : '',
-        unit : '',
-        minimum : '',
-        maximum : '',
-        taxes : '',
-        image : '',
-        department_id : '',
-        category_id : ''
+        name: '',
+        detail: '',
+        code: '',
+        description: '',
+        measurement: '',
+        price: '',
+        sale_price: '',
+        profit: '',
+        unit: '',
+        minimum: '',
+        maximum: '',
+        taxes: '',
+        image: '',
+        department_id: '',
+        category_id: ''
       }"
       :initial-table-data="products"
       :actions-methods="{
         deleteItem: deleteProduct,
         createItem: createProduct,
         editItem: editProduct
-      }">
+      }"
+    >
       <template #input-fields="{ formdata }">
         <b-form-group id="input-group-2" label="Nombre del producto" label-for="name">
-          <b-form-input
-            id="name"
-            v-model="formdata.name"
-            required
-            placeholder="Introduce un nombre del producto" />
+          <b-form-input id="name" v-model="formdata.name" required placeholder="Introduce un nombre del producto" />
         </b-form-group>
         <b-form-group id="input-group-2" label="Detalle del producto" label-for="detail">
-          <b-form-input
-            id="detail"
-            v-model="formdata.detail"
-            required
-            placeholder="Introduce un detalle de producto" />
+          <b-form-input id="detail" v-model="formdata.detail" required placeholder="Introduce un detalle de producto" />
         </b-form-group>
         <b-form-group id="input-group-2" label="Código del producto" label-for="code">
-          <b-form-input
-            id="code"
-            v-model="formdata.code"
-            required
-            placeholder="Introduce un código de producto" />
+          <b-form-input id="code" v-model="formdata.code" required placeholder="Introduce un código de producto" />
         </b-form-group>
         <b-form-group id="input-group-2" label="Descripción del producto" label-for="description">
           <b-form-input
             id="description"
             v-model="formdata.description"
             required
-            placeholder="Introduce la descripción del producto" />
+            placeholder="Introduce la descripción del producto"
+          />
         </b-form-group>
         <b-form-group id="input-group-2" label="Unidad de medida del producto" label-for="measurement">
           <b-form-input
             id="measurement"
             v-model="formdata.measurement"
             required
-            placeholder="Introduce una unidad de medida de producto" />
+            placeholder="Introduce una unidad de medida de producto"
+          />
         </b-form-group>
         <b-form-group id="input-group-2" label="Tipo de venta del producto" label-for="unit">
           <b-form-input
             id="unit"
             v-model="formdata.unit"
             required
-            placeholder="Introduce un tipo de venta de producto" />
+            placeholder="Introduce un tipo de venta de producto"
+          />
         </b-form-group>
         <b-form-group id="input-group-2" label="Costo del producto" label-for="price">
           <b-form-input
@@ -98,7 +90,8 @@
             required
             type="number"
             placeholder="Introduce un costo de producto"
-            @change="onChangePrice(formdata.price)" />
+            @change="onChangePrice(formdata.price)"
+          />
         </b-form-group>
         <b-form-group id="input-group-2" label="Ganancia del producto" label-for="profit">
           <b-form-input
@@ -107,7 +100,8 @@
             type="number"
             required
             placeholder="Introduce un ganancia de producto"
-            @change="onChangeProfit(formdata.profit)" />
+            @change="onChangeProfit(formdata.profit)"
+          />
         </b-form-group>
         <b-form-group id="input-group-2" label="Precio de venta del producto" label-for="sale_price">
           <b-form-input
@@ -115,7 +109,8 @@
             v-model="productPrice.sale_price"
             type="number"
             required
-            placeholder="Introduce un precio de venta de producto" />
+            placeholder="Introduce un precio de venta de producto"
+          />
         </b-form-group>
         <b-form-group id="input-group-2" label="Mínimo del producto" label-for="minimum">
           <b-form-input
@@ -123,7 +118,8 @@
             v-model="formdata.minimum"
             type="number"
             required
-            placeholder="Introduce un mínimo de producto" />
+            placeholder="Introduce un mínimo de producto"
+          />
         </b-form-group>
         <b-form-group id="input-group-2" label="Máximo del producto" label-for="maximum">
           <b-form-input
@@ -131,7 +127,8 @@
             v-model="formdata.maximum"
             type="number"
             required
-            placeholder="Introduce un máximo de producto" />
+            placeholder="Introduce un máximo de producto"
+          />
         </b-form-group>
         <b-form-group id="input-group-2" label="Impuesto del producto" label-for="taxes">
           <b-form-input
@@ -139,14 +136,11 @@
             v-model="formdata.taxes"
             type="number"
             required
-            placeholder="Introduce el impuesto de producto" />
+            placeholder="Introduce el impuesto de producto"
+          />
         </b-form-group>
         <b-form-group id="input-group-2" label="Imagen del producto" label-for="image">
-          <b-form-input
-            id="image"
-            v-model="formdata.image"
-            required
-            placeholder="Introduce una imagen de producto" />
+          <b-form-input id="image" v-model="formdata.image" required placeholder="Introduce una imagen de producto" />
         </b-form-group>
         <vue-file-pond
           ref="pond"
@@ -157,22 +151,13 @@
           accepted-file-types="image/jpeg, image/png"
           server="/api"
           :files="myFiles"
-          @init="handleFilePondInit" />
+          @init="handleFilePondInit"
+        />
         <b-form-group id="input-group-2" label="Categoría del producto" label-for="category">
-          <b-form-select
-            id="category"
-            v-model="formdata.category_id"
-            :options="categories"
-            required
-          />
+          <b-form-select id="category" v-model="formdata.category_id" :options="categories" required />
         </b-form-group>
         <b-form-group id="input-group-2" label="Departamento del producto" label-for="department">
-          <b-form-select
-            id="department"
-            v-model="formdata.department_id"
-            :options="departments"
-            required
-          />
+          <b-form-select id="department" v-model="formdata.department_id" :options="departments" required />
         </b-form-group>
       </template>
     </CrudTable>
@@ -209,59 +194,82 @@ export default {
   },
   methods: {
     handleFilePondInit () {
+      // eslint-disable-next-line no-console
       console.log('FilePond has initialized')
     },
     async deleteProduct (productId) {
       return await ProductsServices(this.$axios).deleteProduct(productId)
     },
-    // eslint-disable-next-line camelcase
-    async createProduct ({ name, detail, code, description, measurement, price, sale_price, profit, unit, minimum, maximum, taxes, image }) {
-      return await ProductsServices(this.$axios)
-        .createProduct({
-          name,
-          detail,
-          code,
-          description,
-          measurement,
-          price,
-          // eslint-disable-next-line camelcase
-          sale_price: this.productPrice.sale_price,
-          profit,
-          unit,
-          minimum,
-          maximum,
-          taxes,
-          image,
-          status: 1,
-          department_id: 1,
-          category_id: 1
-        })
+    async createProduct ({
+      name,
+      detail,
+      code,
+      description,
+      measurement,
+      price,
+      profit,
+      unit,
+      minimum,
+      maximum,
+      taxes,
+      image
+    }) {
+      return await ProductsServices(this.$axios).createProduct({
+        name,
+        detail,
+        code,
+        description,
+        measurement,
+        price,
+        sale_price: this.productPrice.sale_price,
+        profit,
+        unit,
+        minimum,
+        maximum,
+        taxes,
+        image,
+        status: 1,
+        department_id: 1,
+        category_id: 1
+      })
     },
-    // eslint-disable-next-line camelcase
-    async editProduct (productId, { name, detail, code, description, measurement, price, sale_price, profit, unit, minimum, maximum, taxes, image, department_id, category_id }) {
-      return await ProductsServices(this.$axios).mutateProduct(
-        productId,
-        {
-          name,
-          detail,
-          code,
-          description,
-          measurement,
-          price,
-          // eslint-disable-next-line camelcase
-          sale_price: this.productPrice.sale_price,
-          profit,
-          unit,
-          minimum,
-          maximum,
-          taxes,
-          image,
-          status: 1,
-          // eslint-disable-next-line camelcase
-          department_id,
-          // eslint-disable-next-line camelcase
-          category_id
-        })
+    async editProduct (
+      productId,
+      {
+        name,
+        detail,
+        code,
+        description,
+        measurement,
+        price,
+        profit,
+        unit,
+        minimum,
+        maximum,
+        taxes,
+        image,
+        department_id,
+        category_id
+      }
+    ) {
+      return await ProductsServices(this.$axios).mutateProduct(productId, {
+        name,
+        detail,
+        code,
+        description,
+        measurement,
+        price,
+        sale_price: this.productPrice.sale_price,
+        profit,
+        unit,
+        minimum,
+        maximum,
+        taxes,
+        image,
+        status: 1,
+        department_id,
+        category_id
+      })
     },
     getCategories () {
       this.$axios.$get('/api/categories').then(response => {
@@ -298,7 +306,8 @@ export default {
       }
     },
     changeSalePrice () {
-      this.productPrice.sale_price = Math.ceil(this.productPrice.price * (this.productPrice.profit / 100)) + parseInt(this.productPrice.price)
+      this.productPrice.sale_price =
+        Math.ceil(this.productPrice.price * (this.productPrice.profit / 100)) + parseInt(this.productPrice.price)
     }
   },
   fetchOnServer: true,
